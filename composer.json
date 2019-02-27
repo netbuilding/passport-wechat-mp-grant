@@ -1,0 +1,26 @@
+{
+  "name": "netbuilding/passport-wechat-mp-grant",
+  "type": "library",
+  "require": {
+    "laravel/passport": "^7.1",
+    "overtrue/laravel-wechat": "~4.0"
+  },
+  "authors": [
+    {
+      "name": "Isaac Liu",
+      "email": "isaac.liu@net-building.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "NetBuilding\\PassportWechatMpGrant\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "NetBuilding\\PassportWechatMpGrant\\WechatMpGrantServiceProvider"
+      ]
+    }
+  }
+}
