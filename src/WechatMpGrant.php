@@ -6,19 +6,19 @@
  * Time: 15:38
  */
 
-namespace Netbuilding\PassportWechatMpGrant;
+namespace NetBuilding\PassportWechatMpGrant;
 
 use DateInterval;
-use http\Exception\RuntimeException;
-use Laravel\Passport\Bridge\RefreshTokenRepository;
 use Laravel\Passport\Bridge\User;
-use League\OAuth2\Server\Entities\ClientEntityInterface;
-use League\OAuth2\Server\Entities\UserEntityInterface;
-use League\OAuth2\Server\Exception\OAuthServerException;
-use League\OAuth2\Server\Grant\AbstractGrant;
+use http\Exception\RuntimeException;
 use League\OAuth2\Server\RequestEvent;
-use League\OAuth2\Server\ResponseTypes\ResponseTypeInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use League\OAuth2\Server\Grant\AbstractGrant;
+use Laravel\Passport\Bridge\RefreshTokenRepository;
+use League\OAuth2\Server\Entities\UserEntityInterface;
+use League\OAuth2\Server\Entities\ClientEntityInterface;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use League\OAuth2\Server\ResponseTypes\ResponseTypeInterface;
 
 class WechatMpGrant extends AbstractGrant
 {
@@ -75,7 +75,7 @@ class WechatMpGrant extends AbstractGrant
         $token = app('wechat.mini_program')->auth->session($code);
 
         if (method_exists($model, 'findByOAuth')) {
-            $user = (new $model)::findByOAuth('wechat_mp', $token['openid']);
+            $user = (new $model)::findByOAuth('wechat_mp', $token['openid'], $token);
         } else {
             $user = (new $model)->where('openid', $token['openid'])->first();
         }
