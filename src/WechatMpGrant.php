@@ -74,6 +74,10 @@ class WechatMpGrant extends AbstractGrant
 
         $token = app('wechat.mini_program')->auth->session($code);
 
+        if (isset($token['errcode'])) {
+            throw OAuthServerException::invalidCredentials();
+        }
+
         if (method_exists($model, 'findByOAuth')) {
             $user = (new $model)::findByOAuth('wechat_mp', $token['openid'], $token);
         } else {
